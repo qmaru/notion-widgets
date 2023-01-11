@@ -18,21 +18,22 @@ export default function Welcome() {
         padding: 10,
         textAlign: "center"
       }}>
-      <Typography variant="h3">
+      <Typography variant="h4">
         Welcome Notion Widgets
       </Typography>
 
       <List>
         {WidgetInfos.map((item: any, index: number) => {
           return (
-            <ListItem disablePadding key={"item" + index}>
-              <ListItemButton component="a" href={item.url}>
-                <ListItemIcon>
-                  <LinkSharpIcon />
-                </ListItemIcon>
-                <ListItemText primary={item.name} />
-              </ListItemButton>
-            </ListItem>
+            item.name !== "" ?
+              <ListItem disablePadding key={"item" + index}>
+                <ListItemButton component="a" href={item.url}>
+                  <ListItemIcon>
+                    <LinkSharpIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={item.name} />
+                </ListItemButton>
+              </ListItem> : undefined
           )
         })}
       </List>

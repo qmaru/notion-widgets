@@ -33,8 +33,8 @@ function App() {
       createTheme({
         typography: {
           fontFamily: [
-            'Bree Serif',
-            'sans-serif',
+            'Martian Mono',
+            "monospace",
           ].join(','),
         },
       }),

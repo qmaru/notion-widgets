@@ -20,9 +20,9 @@ const BorderLinearProgress = styled(LinearProgress)(() => ({
 }))
 
 export default function DailyProgress() {
-  const [yearDaysProgress, setYearDaysProgress] = useState(0)
-  const [monthDaysProgress, setMonthDaysProgress] = useState(0)
-  const [dayTimeProgress, setDayTimeProgress] = useState(0)
+  const [yearDaysProgress, setYearDaysProgress] = useState<number>(0)
+  const [monthDaysProgress, setMonthDaysProgress] = useState<number>(0)
+  const [dayTimeProgress, setDayTimeProgress] = useState<number>(0)
 
   const yearDays = () => {
     var currentDate: Date = new Date()
@@ -93,9 +93,9 @@ export default function DailyProgress() {
         <Box sx={{ width: '100%' }}>
           <BorderLinearProgress variant="determinate" value={props.value} />
         </Box>
-        <Box sx={{ minWidth: "6rem", padding: "0 1rem" }}>
+        <Box sx={{ minWidth: "8rem", padding: "0 1rem" }}>
           <Typography variant="subtitle1" color="#232526">
-            {props.title}: {props.value}%
+            {props.title}:{props.value}%
           </Typography>
         </Box>
       </Box>
