@@ -11,6 +11,11 @@ export default function CountdownTimer() {
   const [timerTitle, setTimerTitle] = useState<string>("No Title")
   const [timerDate, setTimerDate] = useState<number>(new Date().getTime())
 
+  const [dayUnit, setDayUnit] = useState<string>("Days")
+  const [hourUnit, setHourUnit] = useState<string>("Hours")
+  const [minuteUnit, setMinuteUnit] = useState<string>("Minutes")
+  const [secondUnit, setSecondUnit] = useState<string>("Seconds")
+
   const QueryData = useCallback(() => {
     var query: string = window.location.search.substring(1)
     var vars: string[] = query.split("&")
@@ -41,6 +46,25 @@ export default function CountdownTimer() {
     return t.toString().padStart(2, "0")
   }
 
+  const PaperDate = (props: any) => {
+    return (
+      <Paper elevation={12} sx={{ padding: "0.4rem" }}>
+        <Typography
+          component="div"
+          sx={{ paddingTop: "0.2rem" }}
+        >
+          {props.value}
+        </Typography>
+        <Typography
+          component="div"
+          variant="caption"
+        >
+          {props.unit}
+        </Typography>
+      </Paper>
+    )
+  }
+
   const CountdownTimer = () => {
     var currentDate: Date = new Date()
     var currentUnix: number = currentDate.getTime()
@@ -56,17 +80,26 @@ export default function CountdownTimer() {
             <Box sx={{
               display: 'flex',
               justifyContent: "center",
-              alignContent: "center",
               flexWrap: 'wrap',
               '& > :not(style)': {
-                m: 1,
-                width: "34rem",
-                height: "6rem",
+                margin: "0 0.2rem",
+                width: "80%",
+                height: "20%",
               }
             }}>
-              <Paper elevation={12}>
-                <Typography variant="h3" component="div" sx={{ padding: "0.2rem" }}>Time up</Typography>
-                <Typography component="div">Please reset</Typography>
+              <Paper elevation={12} sx={{ padding: "0.4rem" }}>
+                <Typography
+                  component="div"
+                  sx={{ paddingTop: "0.2rem" }}
+                >
+                  Time up
+                </Typography>
+                <Typography
+                  component="div"
+                  variant="caption"
+                >
+                  Please reset
+                </Typography>
               </Paper>
             </Box>
           </Typography> :
@@ -74,32 +107,17 @@ export default function CountdownTimer() {
             <Box sx={{
               display: 'flex',
               justifyContent: "center",
-              alignContent: "center",
               flexWrap: 'wrap',
               '& > :not(style)': {
-                m: "0.4rem",
-                width: "20%",
+                margin: "0 0.2rem",
+                width: "15%",
                 height: "20%",
               }
             }}>
-              <Paper elevation={12} sx={{ padding: "0.2rem" }}>
-                <Typography variant="h3" component="div" sx={{ padding: "0.2rem" }}>
-                  {days}
-                </Typography>
-                <Typography component="div">Days</Typography>
-              </Paper>
-              <Paper elevation={12} sx={{ padding: "0.2rem" }}>
-                <Typography variant="h3" component="div" sx={{ padding: "0.2rem" }}>{addZero(hours)}</Typography>
-                <Typography component="div">Hours</Typography>
-              </Paper>
-              <Paper elevation={12} sx={{ padding: "0.2rem" }}>
-                <Typography variant="h3" component="div" sx={{ padding: "0.2rem" }}>{addZero(minutes)}</Typography>
-                <Typography component="div">Minutes</Typography>
-              </Paper>
-              <Paper elevation={12} sx={{ padding: "0.2rem" }}>
-                <Typography variant="h3" component="div" sx={{ padding: "0.2rem" }}>{addZero(seconds)}</Typography>
-                <Typography component="div">Seconds</Typography>
-              </Paper>
+              <PaperDate value={days} unit={dayUnit} />
+              <PaperDate value={addZero(hours)} unit={hourUnit} />
+              <PaperDate value={addZero(minutes)} unit={minuteUnit} />
+              <PaperDate value={addZero(seconds)} unit={secondUnit} />
             </Box>
           </Typography>
         }
@@ -107,13 +125,35 @@ export default function CountdownTimer() {
     )
   }
 
+  const ResetUnit = (e: any) => {
+    let w = e.target.innerWidth
+    if (w <= 420) {
+      setDayUnit("D")
+      setHourUnit("H")
+      setMinuteUnit("M")
+      setSecondUnit("S")
+    } else {
+      setDayUnit("Days")
+      setHourUnit("Hours")
+      setMinuteUnit("Minutes")
+      setSecondUnit("Seconds")
+    }
+  }
+
   useEffect(() => {
     QueryData()
+
+    window.addEventListener("resize", ResetUnit)
+
     const tick = setInterval(() => {
       setTimerDate(timerDate - 1)
     }, 1000)
-    return () => clearInterval(tick)
-  })
+
+    return () => {
+      clearInterval(tick)
+      window.removeEventListener("resize", ResetUnit)
+    }
+  }, [QueryData, timerDate])
 
   return (
     <Container
