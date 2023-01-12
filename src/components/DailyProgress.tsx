@@ -6,26 +6,25 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: "10vh",
+  margin: "3% 0",
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: `${theme.palette.mode === "dark" ? "#121212" : "#ffffff"}`,
+    borderRadius: "0.3rem",
+    border: `4px solid ${theme.palette.mode === "dark" ? "#121212" : "#ffffff"}`,
+    boxShadow: `0 0 0 4px ${theme.palette.mode === "dark" ? "#ECE9E6" : "#232526"}`
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    backgroundImage: `${theme.palette.mode === "dark" ? "linear-gradient(135deg, #ECE9E6 10%, #FFFFFF 100%)" : "linear-gradient(135deg, #232526 10%, #414345 100%)"}`
+  }
+}))
 
 export default function DailyProgress() {
   const prefersDarkMode: boolean = useMediaQuery('(prefers-color-scheme: dark)')
   const [yearDaysProgress, setYearDaysProgress] = useState<number>(0)
   const [monthDaysProgress, setMonthDaysProgress] = useState<number>(0)
   const [dayTimeProgress, setDayTimeProgress] = useState<number>(0)
-
-  const BorderLinearProgress = styled(LinearProgress)(() => ({
-    height: "10vh",
-    margin: "3% 0",
-    [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: `${prefersDarkMode ? "#121212" : "#ffffff"}`,
-      borderRadius: "0.3rem",
-      border: `4px solid ${prefersDarkMode ? "#121212" : "#ffffff"}`,
-      boxShadow: `0 0 0 4px ${prefersDarkMode ? "#ECE9E6" : "#232526"}`
-    },
-    [`& .${linearProgressClasses.bar}`]: {
-      backgroundImage: `${prefersDarkMode ? "linear-gradient(135deg, #ECE9E6 10%, #FFFFFF 100%)" : "linear-gradient(135deg, #232526 10%, #414345 100%)"}`
-    }
-  }))
 
   const yearDays = () => {
     var currentDate: Date = new Date()

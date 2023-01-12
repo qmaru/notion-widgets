@@ -131,9 +131,8 @@ export default function CountdownTimer() {
     )
   }
 
-  const ResetUnit = (e: any) => {
-    let w = e.target.innerWidth
-    if (w <= 480) {
+  const resetUnicCore = (width: number) => {
+    if (width <= 480) {
       setDayUnit("D")
       setHourUnit("H")
       setMinuteUnit("M")
@@ -146,9 +145,15 @@ export default function CountdownTimer() {
     }
   }
 
+  const ResetUnit = useCallback((e: any) => {
+    let w = e.target.innerWidth
+    resetUnicCore(w)
+  }, [])
+
   useEffect(() => {
     QueryData()
 
+    resetUnicCore(window.innerWidth)
     window.addEventListener("resize", ResetUnit)
 
     const tick = setInterval(() => {
@@ -159,7 +164,7 @@ export default function CountdownTimer() {
       clearInterval(tick)
       window.removeEventListener("resize", ResetUnit)
     }
-  }, [QueryData, timerDate])
+  }, [QueryData, ResetUnit, timerDate])
 
   return (
     <Container
@@ -172,13 +177,13 @@ export default function CountdownTimer() {
       }}
     >
       <Box sx={{ textAlign: "center" }}>
-        <Card variant="outlined" sx={{ backgroundImage: `${prefersDarkMode ? "linear-gradient(135deg, #232526 10%, #414345 100%)" : "linear-gradient(135deg, #ECE9E6 10%, #FFFFFF 100%)"}` }}>
+        <Card sx={{ backgroundImage: `${prefersDarkMode ? "linear-gradient(360deg, #3b3b3b 10%, #121212 80%)" : "linear-gradient(135deg, #ECE9E6 10%, #FFFFFF 100%)"}` }}>
           <CardContent>
             <Typography
               variant="h5"
               component="div"
               sx={{
-                padding: "1vw",
+                padding: "1.5vw",
                 color: `${prefersDarkMode ? "#ECE9E6" : "#232526"}`
               }}
             >
