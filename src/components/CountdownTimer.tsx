@@ -52,7 +52,7 @@ export default function CountdownTimer() {
     return (
       <Paper elevation={12} sx={{
         padding: "0.4rem",
-        backgroundImage: `${prefersDarkMode ? "linear-gradient(45deg, #232526 10%, #414345 50%)" : "linear-gradient(45deg, #ECE9E6 10%, #FFFFFF 50%)"}`,
+        backgroundImage: `${prefersDarkMode ? "linear-gradient(0.5turn, #414345 10%, #232526 60%)" : "linear-gradient(0.5turn, #FFFFFF 10%, #ECE9E6 50%)"}`,
         color: `${prefersDarkMode ? "#ECE9E6" : "#232526"}`
       }}>
         <Typography
@@ -177,7 +177,7 @@ export default function CountdownTimer() {
       }}
     >
       <Box sx={{ textAlign: "center" }}>
-        <Card sx={{ backgroundImage: `${prefersDarkMode ? "linear-gradient(360deg, #3b3b3b 10%, #121212 80%)" : "linear-gradient(135deg, #ECE9E6 10%, #FFFFFF 100%)"}` }}>
+        <Card sx={{ backgroundImage: `${prefersDarkMode ? "linear-gradient(0.5turn, #3b3b3b 10%, #121212 50%)" : "linear-gradient(0.5turn, #ECE9E6 10%, #FFFFFF 80%)"}` }}>
           <CardContent>
             <Typography
               variant="h5"
