@@ -32,7 +32,6 @@ export default function CountdownTimer() {
           setTimerDate(date)
         }
       }
-
     }
   }, [])
 
@@ -48,11 +47,28 @@ export default function CountdownTimer() {
     return t.toString().padStart(2, "0")
   }
 
+  const BoxDate = (props: any) => {
+    return (
+      <Box sx={{
+        display: 'flex',
+        justifyContent: "center",
+        flexWrap: 'wrap',
+        '& > :not(style)': {
+          margin: "0 0.2rem",
+          width: `${props.width}`,
+          height: "20%",
+        }
+      }} >
+        {props.pages}
+      </Box>
+    )
+  }
+
   const PaperDate = (props: any) => {
     return (
-      <Paper elevation={12} sx={{
+      <Paper elevation={4} sx={{
         padding: "0.4rem",
-        backgroundImage: `${prefersDarkMode ? "linear-gradient(0.5turn, #414345 10%, #232526 60%)" : "linear-gradient(0.5turn, #FFFFFF 10%, #ECE9E6 50%)"}`,
+        backgroundImage: `${prefersDarkMode ? "linear-gradient(0.5turn, #414345 10%, #232526 40%)" : "linear-gradient(0.5turn, #FFFFFF 10%, #ECE9E6 50%)"}`,
         color: `${prefersDarkMode ? "#ECE9E6" : "#232526"}`
       }}>
         <Typography
@@ -82,50 +98,18 @@ export default function CountdownTimer() {
     return (
       <Typography component="div">
         {total <= 0 ?
-          <Typography component="div">
-            <Box sx={{
-              display: 'flex',
-              justifyContent: "center",
-              flexWrap: 'wrap',
-              '& > :not(style)': {
-                margin: "0 0.2rem",
-                width: "80%",
-                height: "20%",
-              }
-            }}>
-              <Paper elevation={12} sx={{ padding: "0.4rem" }}>
-                <Typography
-                  component="div"
-                  sx={{ paddingTop: "0.2rem" }}
-                >
-                  Time up
-                </Typography>
-                <Typography
-                  component="div"
-                  variant="caption"
-                >
-                  Please reset
-                </Typography>
-              </Paper>
-            </Box>
-          </Typography> :
-          <Typography component="div">
-            <Box sx={{
-              display: 'flex',
-              justifyContent: "center",
-              flexWrap: 'wrap',
-              '& > :not(style)': {
-                margin: "0 0.2rem",
-                width: "15%",
-                height: "20%",
-              }
-            }}>
-              <PaperDate value={days} unit={dayUnit} />
-              <PaperDate value={addZero(hours)} unit={hourUnit} />
-              <PaperDate value={addZero(minutes)} unit={minuteUnit} />
-              <PaperDate value={addZero(seconds)} unit={secondUnit} />
-            </Box>
-          </Typography>
+          <BoxDate key={"timeup"} width="50%" pages={[
+            <PaperDate key={"timeup"} value={"Time up"} unit={"Please reset"} />
+          ]}>
+          </BoxDate>
+          :
+          <BoxDate key={"timer"} width="15%" pages={[
+            <PaperDate key={dayUnit} value={days} unit={dayUnit} />,
+            <PaperDate key={hourUnit} value={addZero(hours)} unit={hourUnit} />,
+            <PaperDate key={minuteUnit} value={addZero(minutes)} unit={minuteUnit} />,
+            <PaperDate key={secondUnit} value={addZero(seconds)} unit={secondUnit} />
+          ]}>
+          </BoxDate>
         }
       </Typography>
     )
