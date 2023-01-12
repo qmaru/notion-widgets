@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
@@ -8,6 +9,7 @@ import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 
 export default function CountdownTimer() {
+  const prefersDarkMode: boolean = useMediaQuery('(prefers-color-scheme: dark)')
   const [timerTitle, setTimerTitle] = useState<string>("No Title")
   const [timerDate, setTimerDate] = useState<number>(new Date().getTime())
 
@@ -48,7 +50,11 @@ export default function CountdownTimer() {
 
   const PaperDate = (props: any) => {
     return (
-      <Paper elevation={12} sx={{ padding: "0.4rem" }}>
+      <Paper elevation={12} sx={{
+        padding: "0.4rem",
+        backgroundImage: `${prefersDarkMode ? "linear-gradient(45deg, #232526 10%, #414345 50%)" : "linear-gradient(45deg, #ECE9E6 10%, #FFFFFF 50%)"}`,
+        color: `${prefersDarkMode ? "#ECE9E6" : "#232526"}`
+      }}>
         <Typography
           component="div"
           sx={{ paddingTop: "0.2rem" }}
@@ -127,7 +133,7 @@ export default function CountdownTimer() {
 
   const ResetUnit = (e: any) => {
     let w = e.target.innerWidth
-    if (w <= 420) {
+    if (w <= 480) {
       setDayUnit("D")
       setHourUnit("H")
       setMinuteUnit("M")
@@ -166,14 +172,14 @@ export default function CountdownTimer() {
       }}
     >
       <Box sx={{ textAlign: "center" }}>
-        <Card sx={{ backgroundImage: "linear-gradient(45deg, #bdc3c7 10%, #2c3e50 100%)" }}>
+        <Card variant="outlined" sx={{ backgroundImage: `${prefersDarkMode ? "linear-gradient(135deg, #232526 10%, #414345 100%)" : "linear-gradient(135deg, #ECE9E6 10%, #FFFFFF 100%)"}` }}>
           <CardContent>
             <Typography
               variant="h5"
               component="div"
               sx={{
                 padding: "1vw",
-                color: "#ffffff"
+                color: `${prefersDarkMode ? "#ECE9E6" : "#232526"}`
               }}
             >
               {timerTitle}

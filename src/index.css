@@ -7,3 +7,10 @@ body {
   user-select: none;
   font-family: 'Martian Mono', monospace;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color           : #f5f5f5;
+  }
+}

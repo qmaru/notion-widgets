@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
@@ -28,9 +29,15 @@ function Router() {
 }
 
 function App() {
+  const prefersDarkMode: boolean = useMediaQuery('(prefers-color-scheme: dark)')
   var GlobalTheme = useMemo(
     () =>
       createTheme({
+        palette: {
+          mode: prefersDarkMode ? 'dark' : 'light',
+          contrastThreshold: 3,
+          tonalOffset: 0.2,
+        },
         typography: {
           fontFamily: [
             'Martian Mono',
@@ -38,7 +45,7 @@ function App() {
           ].join(','),
         },
       }),
-    [],
+    [prefersDarkMode],
   )
   return (
     <ThemeProvider theme={GlobalTheme}>
