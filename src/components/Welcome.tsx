@@ -27,7 +27,7 @@ export default function Welcome() {
           return (
             item.name !== "" ?
               <ListItem disablePadding key={"item" + index}>
-                <ListItemButton component="a" href={item.url}>
+                <ListItemButton component="a" href={item.timestamp ? item.url + "?_=" + new Date().getTime() : item.url}>
                   <ListItemIcon>
                     <LinkSharpIcon />
                   </ListItemIcon>

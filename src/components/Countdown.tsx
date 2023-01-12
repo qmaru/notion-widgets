@@ -46,7 +46,7 @@ export default function Countdown() {
       futureTime = futureUnix.toString()
     }
 
-    var timerURL: string = window.location.href + `/timer?title=${encodeURIComponent(timerTitle)}&time=${futureTime}`
+    var timerURL: string = window.location.href + `/timer?_=${new Date().getTime()}&title=${encodeURIComponent(timerTitle)}&time=${futureTime}`
     setTimerResult(timerURL)
   }
 
