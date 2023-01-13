@@ -28,30 +28,39 @@ export default function Countdown() {
   }
 
   const Generate = () => {
-    if (timerTitle === "") {
-      setTimerTitleError("Title is required!")
-      return false
-    }
-
     var currentTime: Date = new Date()
     var currentUnix: number = currentTime.getTime()
     var futureUnix: number | undefined = timerDate?.seconds(0).valueOf()
     var futureTime: string = ""
     if (futureUnix) {
       if (currentUnix > futureUnix) {
-        setTimerDateError("The future time must be greater than the present!")
+        setTimerDateError("Future time error")
+        setTimerResult("")
         return false
       }
       setTimerDateError("")
       futureTime = futureUnix.toString()
     }
 
+    if (timerTitle === "") {
+      setTimerTitleError("Title is required")
+      setTimerResult("")
+      return false
+    }
+
     var timerURL: string = window.location.href + `/timer?_=${new Date().getTime()}&title=${encodeURIComponent(timerTitle)}&time=${futureTime}`
     setTimerResult(timerURL)
+    setTimerDateError("")
+    setTimerTitleError("")
+    setCopyStatus("copy")
   }
 
   const CopyStatus = () => {
     setCopyStatus("copied!")
+  }
+
+  const PressEnter = (e: any) => {
+    e.keyCode === 13 && Generate()
   }
 
   return (
@@ -69,15 +78,8 @@ export default function Countdown() {
           <Typography variant="h6">
             Generate your timer
           </Typography>
-          <TextField
-            error={timerTitleError !== ""}
-            label="Title"
-            variant="outlined"
-            onChange={(e) => TitleChange(e)}
-            helperText={timerTitleError}
-          />
           <DesktopDateTimePicker
-            label="Future"
+            label={timerDateError !== "" ? timerDateError : "Future"}
             ampm={false}
             minDate={dayjs(new Date())}
             inputFormat="YYYY-MM-DD HH:mm"
@@ -88,9 +90,15 @@ export default function Countdown() {
               <TextField
                 {...params}
                 error={timerDateError !== ""}
-                helperText={timerDateError}
               />
             }
+          />
+          <TextField
+            error={timerTitleError !== ""}
+            label={timerTitleError !== "" ? timerTitleError : "Title"}
+            variant="outlined"
+            onChange={(e) => TitleChange(e)}
+            onKeyUp={PressEnter}
           />
           <TextField
             label="Result"
@@ -99,18 +107,17 @@ export default function Countdown() {
             value={timerResult}
           />
           <Button variant="contained" onClick={() => Generate()}>Generate</Button>
-
-          {timerResult !== "" ?
-            <CopyToClipboard text={timerResult} onCopy={() => CopyStatus()}>
-              <Button
-                variant="contained"
-                color='success'
-              >
-                {copyStatus}
-              </Button>
-            </CopyToClipboard> : null
-          }
-
+          <CopyToClipboard text={timerResult} onCopy={() => CopyStatus()}>
+            <Button
+              variant="contained"
+              color='success'
+              sx={{
+                visibility: `${timerResult === "" ? "hidden" : "visible"}`
+              }}
+            >
+              {copyStatus}
+            </Button>
+          </CopyToClipboard>
         </Stack>
       </Box>
     </Container>

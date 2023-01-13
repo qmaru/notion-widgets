@@ -7,12 +7,12 @@ export default function NotFound() {
   return (
     <Container maxWidth="sm" sx={{ textAlign: "center" }}>
       <Box sx={{ paddingTop: 6 }}>
-        <Typography color="primary" variant='h3'>404</Typography>
-        <Typography color="primary" variant='h3'>NOT</Typography>
-        <Typography color="primary" variant='h3'>FOUND</Typography>
+        <Typography variant='h3'>404</Typography>
+        <Typography variant='h3'>NOT</Typography>
+        <Typography variant='h3'>FOUND</Typography>
       </Box>
       <Box sx={{ padding: 2 }}>
-        <Button href="/picture" color="primary" variant='contained'>HOME</Button>
+        <Button href="/notion" variant='contained'>HOME</Button>
       </Box>
     </Container>
   )
