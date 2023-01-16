@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { useSearchParams } from "react-router-dom"
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import Container from '@mui/material/Container'
@@ -10,6 +11,7 @@ import Paper from '@mui/material/Paper'
 
 export default function CountdownTimer() {
   const prefersDarkMode: boolean = useMediaQuery('(prefers-color-scheme: dark)')
+  const [searchParams] = useSearchParams()
   const [timerTitle, setTimerTitle] = useState<string>("No Title")
   const [timerDate, setTimerDate] = useState<number>(new Date().getTime())
 
@@ -18,22 +20,17 @@ export default function CountdownTimer() {
   const [minuteUnit, setMinuteUnit] = useState<string>("Minutes")
   const [secondUnit, setSecondUnit] = useState<string>("Seconds")
 
-  const QueryData = useCallback(() => {
-    var query: string = window.location.search.substring(1)
-    var vars: string[] = query.split("&")
-    for (let i = 0; i < vars.length; i++) {
-      let pair: string[] = vars[i].split("=");
-      if (pair[1] !== "") {
-        if (pair[0] === "title") {
-          var title: string = decodeURIComponent(pair[1])
-          setTimerTitle(title)
-        } else if (pair[0] === "time") {
-          var date: number = parseInt(pair[1])
-          setTimerDate(date)
-        }
-      }
+  const LoadTimerData = useCallback(() => {
+    let title: string | null = searchParams.get("title")
+    let date: string | null = searchParams.get("time")
+    if (title) {
+      setTimerTitle(title)
     }
-  }, [])
+    if (date) {
+      var dateN: number = parseInt(date)
+      setTimerDate(dateN)
+    }
+  }, [searchParams])
 
   const getDateDetails = (countDown: number) => {
     const days = Math.floor(countDown / (1000 * 60 * 60 * 24))
@@ -115,7 +112,7 @@ export default function CountdownTimer() {
     )
   }
 
-  const resetUnicCore = (width: number) => {
+  const SetUnitCore = (width: number) => {
     if (width <= 480) {
       setDayUnit("D")
       setHourUnit("H")
@@ -129,26 +126,27 @@ export default function CountdownTimer() {
     }
   }
 
-  const ResetUnit = useCallback((e: any) => {
+  const LoadUnit = useCallback(() => {
+    SetUnitCore(window.innerWidth)
+  }, [])
+
+  const AdaptiveUnit = useCallback((e: any) => {
     let w = e.target.innerWidth
-    resetUnicCore(w)
+    SetUnitCore(w)
   }, [])
 
   useEffect(() => {
-    QueryData()
+    LoadTimerData()
+    LoadUnit()
 
-    resetUnicCore(window.innerWidth)
-    window.addEventListener("resize", ResetUnit)
-
-    const tick = setInterval(() => {
-      setTimerDate(timerDate - 1)
-    }, 1000)
+    window.addEventListener("resize", AdaptiveUnit)
+    const tick = setInterval(() => { setTimerDate(timerDate - 1) }, 1000)
 
     return () => {
       clearInterval(tick)
-      window.removeEventListener("resize", ResetUnit)
+      window.removeEventListener("resize", AdaptiveUnit)
     }
-  }, [QueryData, ResetUnit, timerDate])
+  }, [LoadTimerData, LoadUnit, AdaptiveUnit, timerDate])
 
   return (
     <Container
