@@ -6,6 +6,8 @@ import Stack from '@mui/material/Stack'
 import Container from '@mui/material/Container'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import HomeIcon from '@mui/icons-material/Home'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
 export default function Countdown() {
@@ -52,8 +54,19 @@ export default function Countdown() {
         flexDirection: "column",
       }}>
         <Stack spacing={3}>
-          <Typography variant="h6">
-            Giev me keyword
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <IconButton href="/notion">
+              <HomeIcon />
+            </IconButton>
+            Give me keyword
           </Typography>
           <TextField
             error={keywordError !== ""}
