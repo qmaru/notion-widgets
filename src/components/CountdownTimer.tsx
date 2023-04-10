@@ -14,6 +14,7 @@ export default function CountdownTimer() {
   const [searchParams] = useSearchParams()
   const [timerTitle, setTimerTitle] = useState<string>("No Title")
   const [timerDate, setTimerDate] = useState<number>(new Date().getTime())
+  const [timerConstDate, setTimerConstDate] = useState<number>(0)
 
   const [dayUnit, setDayUnit] = useState<string>("Days")
   const [hourUnit, setHourUnit] = useState<string>("Hours")
@@ -29,6 +30,7 @@ export default function CountdownTimer() {
     if (date) {
       var dateN: number = parseInt(date)
       setTimerDate(dateN)
+      setTimerConstDate(dateN)
     }
   }, [searchParams])
 
@@ -82,6 +84,16 @@ export default function CountdownTimer() {
         </Typography>
       </Paper>
     )
+  }
+
+  const FutureDateShow = () => {
+    var futureUnix: Date = new Date(timerConstDate)
+    var futureYear: number = futureUnix.getFullYear()
+    var futureMonth: string = (futureUnix.getMonth() + 1).toString().padStart(2, "0")
+    var futureDay: string = futureUnix.getDate().toString().padStart(2, "0")
+    var futureHour: string = futureUnix.getHours().toString().padStart(2, "0")
+    var futureMinute: string = futureUnix.getMinutes().toString().padStart(2, "0")
+    return futureYear + "-" + futureMonth + "-" + futureDay + " " + futureHour + ":" + futureMinute
   }
 
   const CountdownTimer = () => {
@@ -171,6 +183,7 @@ export default function CountdownTimer() {
             >
               {timerTitle}
             </Typography>
+            <Typography variant="caption" display="block" gutterBottom sx={{ paddingBottom: "0.2vw" }}>{FutureDateShow()}</Typography>
             <Typography component="div">
               <CountdownTimer />
             </Typography>
