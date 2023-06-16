@@ -21,10 +21,6 @@ export default function Countdown() {
     setKeyword(event.target.value)
   }
 
-  const PressEnter = (e: any) => {
-    e.keyCode === 13 && Generate()
-  }
-
   const Generate = () => {
     if (keyword === "") {
       setKeywordError("Keyword is required")
@@ -72,8 +68,7 @@ export default function Countdown() {
             error={keywordError !== ""}
             label={keywordError !== "" ? keywordError : "Keyword"}
             variant="outlined"
-            onChange={(e) => KeywordChange(e)}
-            onKeyUp={PressEnter}
+            onChange={(e: any) => KeywordChange(e)}
           />
           <TextField
             label="Result"

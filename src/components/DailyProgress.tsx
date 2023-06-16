@@ -6,7 +6,7 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+const BorderLinearProgress = styled(LinearProgress)(({ theme }: any) => ({
   height: "10vh",
   margin: "3% 0",
   [`&.${linearProgressClasses.colorPrimary}`]: {

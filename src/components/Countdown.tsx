@@ -61,10 +61,6 @@ export default function Countdown() {
     setCopyStatus("copied!")
   }
 
-  const PressEnter = (e: any) => {
-    e.keyCode === 13 && Generate()
-  }
-
   return (
     <Container>
       <Box sx={{
@@ -95,23 +91,17 @@ export default function Countdown() {
             label={timerDateError !== "" ? timerDateError : "Future"}
             ampm={false}
             minDate={dayjs(new Date())}
-            inputFormat="YYYY-MM-DD HH:mm"
+            format="YYYY-MM-DD HH:mm"
             disablePast
             value={timerDate}
             onChange={DateChange}
-            renderInput={(params: any) =>
-              <TextField
-                {...params}
-                error={timerDateError !== ""}
-              />
-            }
+            slotProps={{}}
           />
           <TextField
             error={timerTitleError !== ""}
             label={timerTitleError !== "" ? timerTitleError : "Title"}
             variant="outlined"
-            onChange={(e) => TitleChange(e)}
-            onKeyUp={PressEnter}
+            onChange={(e: any) => TitleChange(e)}
           />
           <TextField
             label="Result"
