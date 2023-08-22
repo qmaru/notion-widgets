@@ -28,7 +28,7 @@ export default function Countdown() {
       return false
     }
 
-    var timerURL: string = window.location.href + `/photo?k=${encodeURIComponent(keyword)}`
+    const timerURL: string = window.location.href + `/photo?k=${encodeURIComponent(keyword)}`
     setPhotoResult(timerURL)
     setCopyStatus("copy")
     setKeywordError("")

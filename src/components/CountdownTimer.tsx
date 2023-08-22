@@ -28,7 +28,7 @@ export default function CountdownTimer() {
       setTimerTitle(title)
     }
     if (date) {
-      var dateN: number = parseInt(date)
+      const dateN: number = parseInt(date)
       setTimerDate(dateN)
       setTimerConstDate(dateN)
     }
@@ -87,22 +87,22 @@ export default function CountdownTimer() {
   }
 
   const FutureDateShow = () => {
-    var futureUnix: Date = new Date(timerConstDate)
-    var futureYear: number = futureUnix.getFullYear()
-    var futureMonth: string = (futureUnix.getMonth() + 1).toString().padStart(2, "0")
-    var futureDay: string = futureUnix.getDate().toString().padStart(2, "0")
-    var futureHour: string = futureUnix.getHours().toString().padStart(2, "0")
-    var futureMinute: string = futureUnix.getMinutes().toString().padStart(2, "0")
+    const futureUnix: Date = new Date(timerConstDate)
+    const futureYear: number = futureUnix.getFullYear()
+    const futureMonth: string = (futureUnix.getMonth() + 1).toString().padStart(2, "0")
+    const futureDay: string = futureUnix.getDate().toString().padStart(2, "0")
+    const futureHour: string = futureUnix.getHours().toString().padStart(2, "0")
+    const futureMinute: string = futureUnix.getMinutes().toString().padStart(2, "0")
     return futureYear + "-" + futureMonth + "-" + futureDay + " " + futureHour + ":" + futureMinute
   }
 
   const CountdownTimer = () => {
-    var currentDate: Date = new Date()
-    var currentUnix: number = currentDate.getTime()
-    var futureUnix: number = new Date(timerDate).getTime()
-    var countdown: number = futureUnix - currentUnix
-    var [days, hours, minutes, seconds] = getDateDetails(countdown)
-    var total: number = days + hours + minutes + seconds
+    const currentDate: Date = new Date()
+    const currentUnix: number = currentDate.getTime()
+    const futureUnix: number = new Date(timerDate).getTime()
+    const countdown: number = futureUnix - currentUnix
+    const [days, hours, minutes, seconds] = getDateDetails(countdown)
+    const total: number = days + hours + minutes + seconds
 
     return (
       <Typography component="div">

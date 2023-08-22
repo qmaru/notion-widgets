@@ -30,7 +30,7 @@ function Router() {
 
 function App() {
   const prefersDarkMode: boolean = useMediaQuery('(prefers-color-scheme: dark)')
-  var GlobalTheme = useMemo(
+  const GlobalTheme = useMemo(
     () =>
       createTheme({
         palette: {

@@ -5,7 +5,7 @@ import DailyProgress from './components/DailyProgress'
 import Givemekeyword from './components/Givemekeyword'
 import Givemephoto from './components/Givemephoto'
 
-export var WidgetInfos: any = [
+export const WidgetInfos: any = [
   {
     "name": "Calendar",
     "url": "/notion/calendar",

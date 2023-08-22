@@ -10,11 +10,11 @@ export default function Givemephoto() {
   const [photoURL, setPhotoURL] = useState<string>("")
 
   const GetPhoto = useCallback(() => {
-    var keyword = searchParams.get("k")
+    const keyword = searchParams.get("k")
     if (keyword) {
       const host: string = "https://source.unsplash.com"
       const photo_size: string = "2560x1600"
-      var api_url: string = `${host}/${photo_size}/?${keyword}`
+      const api_url: string = `${host}/${photo_size}/?${keyword}`
       fetch(api_url)
         .then((response) => response.url)
         .then((url) => {

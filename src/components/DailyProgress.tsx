@@ -27,59 +27,56 @@ export default function DailyProgress() {
   const [dayTimeProgress, setDayTimeProgress] = useState<number>(0)
 
   const yearDays = () => {
-    var currentDate: Date = new Date()
-    var currentYear: number = currentDate.getFullYear()
-    var days: number = 0
-    for (var i = 0; i < 12; i++) {
-      var day: Date = new Date(currentYear, i, 0)
+    const currentDate: Date = new Date()
+    const currentYear: number = currentDate.getFullYear()
+    let days: number = 0
+    for (let i = 0; i < 12; i++) {
+      const day: Date = new Date(currentYear, i, 0)
       days = days + day.getDate()
     }
     return days
   }
 
   const monthDays = () => {
-    var currentDate: Date = new Date()
-    var currentYear: number = currentDate.getFullYear()
-    var currentMonth: number = currentDate.getMonth()
-    var day: Date = new Date(currentYear, currentMonth, 0)
-    var days: number = day.getDate()
+    const currentDate: Date = new Date()
+    const currentYear: number = currentDate.getFullYear()
+    const currentMonth: number = currentDate.getMonth()
+    const day: Date = new Date(currentYear, currentMonth, 0)
+    const days: number = day.getDate()
     return days
   }
 
   const pastDaysOfYear = () => {
-    var days: number = yearDays()
+    const days: number = yearDays()
 
-    var currentDate: Date = new Date()
-    var firstDay: Date = new Date()
-    firstDay.setMonth(0)
-    firstDay.setDate(1)
+    const currentDate: Date = new Date()
+    const firstDay: Date = new Date(currentDate.getFullYear(), 0, 1)
 
-    var dateGap: number = currentDate.getDate() - firstDay.getDate()
-    var dayProgerss: number = Math.round(dateGap / days * 100)
-    setYearDaysProgress(dayProgerss)
+    const dateGap: number = currentDate.getTime() - firstDay.getTime()
+    const dayProgerss: number = Math.floor(dateGap / (1000 * 60 * 60 * 24))
+    const dayPer: number = Math.round(dayProgerss / days * 100)
+    setYearDaysProgress(dayPer)
   }
 
   const pastDaysOfMonth = () => {
-    var days: number = monthDays()
+    const days: number = monthDays()
 
-    var currentDate: Date = new Date()
-    var currentDay: number = currentDate.getMonth()
+    const currentDate: Date = new Date()
+    const currentMonth: number = currentDate.getMonth()
 
-    var firstDay: Date = new Date()
-    firstDay.setMonth(currentDay)
-    firstDay.setDate(1)
+    const firstDay: Date = new Date(currentDate.getFullYear(), currentMonth, 1)
 
-    var dateGap: number = currentDate.getDate() - firstDay.getDate()
-    var dayProgerss: number = Math.round(dateGap / days * 100)
+    const dateGap: number = currentDate.getDate() - firstDay.getDate()
+    const dayProgerss: number = Math.round(dateGap / days * 100)
     setMonthDaysProgress(dayProgerss)
   }
 
   const pastTimeOfDay = () => {
-    var currentDate: Date = new Date()
-    var currentHours: number = currentDate.getHours()
-    var currentMinutes: number = currentDate.getMinutes()
+    const currentDate: Date = new Date()
+    const currentHours: number = currentDate.getHours()
+    const currentMinutes: number = currentDate.getMinutes()
 
-    var dayProgerss: number = Math.floor((currentHours * 60 + currentMinutes) / 1440 * 100)
+    const dayProgerss: number = Math.floor((currentHours * 60 + currentMinutes) / 1440 * 100)
     setDayTimeProgress(dayProgerss)
   }
 

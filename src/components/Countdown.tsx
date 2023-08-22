@@ -30,10 +30,10 @@ export default function Countdown() {
   }
 
   const Generate = () => {
-    var currentTime: Date = new Date()
-    var currentUnix: number = currentTime.getTime()
-    var futureUnix: number | undefined = timerDate?.seconds(0).valueOf()
-    var futureTime: string = ""
+    const currentTime: Date = new Date()
+    const currentUnix: number = currentTime.getTime()
+    const futureUnix: number | undefined = timerDate?.seconds(0).valueOf()
+    let futureTime: string = ""
     if (futureUnix) {
       if (currentUnix > futureUnix) {
         setTimerDateError("Future time error")
@@ -50,7 +50,7 @@ export default function Countdown() {
       return false
     }
 
-    var timerURL: string = window.location.href + `/timer?_=${new Date().getTime()}&title=${encodeURIComponent(timerTitle)}&time=${futureTime}`
+    const timerURL: string = window.location.href + `/timer?_=${new Date().getTime()}&title=${encodeURIComponent(timerTitle)}&time=${futureTime}`
     setTimerResult(timerURL)
     setTimerDateError("")
     setTimerTitleError("")
