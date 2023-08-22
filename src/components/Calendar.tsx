@@ -4,7 +4,6 @@ import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import dayjs, { Moment } from 'moment'
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker'
-import { PickersDay } from '@mui/x-date-pickers/PickersDay'
 
 export default function Calendar() {
   const [today, setToday] = useState<Moment | null>(dayjs(new Date()))
