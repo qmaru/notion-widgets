@@ -1,5 +1,6 @@
 # notion-widgets
 
 ```shell
-yarn build
+pnpm install
+pnpm build
 ```
