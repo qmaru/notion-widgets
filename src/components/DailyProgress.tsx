@@ -20,31 +20,46 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }: any) => ({
   }
 }))
 
+const yearDays = () => {
+  const currentDate: Date = new Date()
+  const currentYear: number = currentDate.getFullYear()
+  let days: number = 0
+  for (let i = 0; i < 12; i++) {
+    const day: Date = new Date(currentYear, i, 0)
+    days = days + day.getDate()
+  }
+  return days
+}
+
+const monthDays = () => {
+  const currentDate: Date = new Date()
+  const currentYear: number = currentDate.getFullYear()
+  const currentMonth: number = currentDate.getMonth()
+  const day: Date = new Date(currentYear, currentMonth, 0)
+  const days: number = day.getDate()
+  return days
+}
+
+const LinearProgressWithText = (props: any) => {
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Box sx={{ width: '100%' }}>
+        <BorderLinearProgress variant="determinate" value={props.value} />
+      </Box>
+      <Box sx={{ minWidth: "8rem", padding: "0 1rem" }}>
+        <Typography variant="subtitle1" color={props.darkMode ? "#ECE9E6" : "#232526"}>
+          {props.title}:{props.value}%
+        </Typography>
+      </Box>
+    </Box>
+  )
+}
+
 export default function DailyProgress() {
   const prefersDarkMode: boolean = useMediaQuery('(prefers-color-scheme: dark)')
   const [yearDaysProgress, setYearDaysProgress] = useState<number>(0)
   const [monthDaysProgress, setMonthDaysProgress] = useState<number>(0)
   const [dayTimeProgress, setDayTimeProgress] = useState<number>(0)
-
-  const yearDays = () => {
-    const currentDate: Date = new Date()
-    const currentYear: number = currentDate.getFullYear()
-    let days: number = 0
-    for (let i = 0; i < 12; i++) {
-      const day: Date = new Date(currentYear, i, 0)
-      days = days + day.getDate()
-    }
-    return days
-  }
-
-  const monthDays = () => {
-    const currentDate: Date = new Date()
-    const currentYear: number = currentDate.getFullYear()
-    const currentMonth: number = currentDate.getMonth()
-    const day: Date = new Date(currentYear, currentMonth, 0)
-    const days: number = day.getDate()
-    return days
-  }
 
   const pastDaysOfYear = () => {
     const days: number = yearDays()
@@ -86,21 +101,6 @@ export default function DailyProgress() {
     pastTimeOfDay()
   })
 
-  const LinearProgressWithText = (props: any) => {
-    return (
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Box sx={{ width: '100%' }}>
-          <BorderLinearProgress variant="determinate" value={props.value} />
-        </Box>
-        <Box sx={{ minWidth: "8rem", padding: "0 1rem" }}>
-          <Typography variant="subtitle1" color={prefersDarkMode ? "#ECE9E6" : "#232526"}>
-            {props.title}:{props.value}%
-          </Typography>
-        </Box>
-      </Box>
-    )
-  }
-
   return (
     <Container
       maxWidth={false}
@@ -112,9 +112,9 @@ export default function DailyProgress() {
         width: '100%',
         justifyContent: "center"
       }}>
-        <LinearProgressWithText title="Year" value={yearDaysProgress} />
-        <LinearProgressWithText title="Month" value={monthDaysProgress} />
-        <LinearProgressWithText title="Day" value={dayTimeProgress} />
+        <LinearProgressWithText darkMode={prefersDarkMode} title="Year" value={yearDaysProgress} />
+        <LinearProgressWithText darkMode={prefersDarkMode} title="Month" value={monthDaysProgress} />
+        <LinearProgressWithText darkMode={prefersDarkMode} title="Day" value={dayTimeProgress} />
       </Box>
     </Container>
   )
