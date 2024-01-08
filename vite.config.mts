@@ -13,8 +13,7 @@ export default defineConfig({
   },
   build: {
     outDir: 'build',
-    reportCompressedSize: false,
-    sourcemap: false
+    sourcemap: false,
   },
   plugins: [
     react(),
