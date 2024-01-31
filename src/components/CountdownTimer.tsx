@@ -169,6 +169,7 @@ export default function CountdownTimer() {
         width: "100vw",
         height: "100vh"
       }}
+      disableGutters
     >
       <Box sx={{ textAlign: "center" }}>
         <Card sx={{ backgroundImage: `${prefersDarkMode ? "linear-gradient(0.5turn, #3b3b3b 10%, #121212 50%)" : "linear-gradient(0.5turn, #ECE9E6 10%, #FFFFFF 80%)"}` }}>
