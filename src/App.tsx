@@ -5,7 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 import Welcome from './components/Welcome'
 import NotFound from './components/NotFound'
@@ -49,7 +49,7 @@ function App() {
   )
   return (
     <ThemeProvider theme={GlobalTheme}>
-      <LocalizationProvider dateAdapter={AdapterMoment}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Router />
       </LocalizationProvider>
     </ThemeProvider>

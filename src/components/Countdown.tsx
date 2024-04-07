@@ -8,31 +8,27 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import HomeIcon from '@mui/icons-material/Home'
-import dayjs, { Moment } from 'moment'
+import dayjs, { Dayjs } from 'dayjs'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { DesktopDateTimePicker } from '@mui/x-date-pickers/DesktopDateTimePicker'
 
 export default function Countdown() {
   const [timerTitle, setTimerTitle] = useState<string>("")
-  const [timerDate, setTimerDate] = useState<Moment | null>(dayjs(new Date()))
+  const [timerDate, setTimerDate] = useState<Dayjs | null>(dayjs(new Date()))
   const [timerResult, setTimerResult] = useState<string>("")
   const [copyStatus, setCopyStatus] = useState<string>("copy")
 
   const [timerTitleError, setTimerTitleError] = useState<string>("")
   const [timerDateError, setTimerDateError] = useState<string>("")
 
-  const TitleChange = (event: any) => {
-    setTimerTitle(event.target.value)
-  }
+  const TitleChange = (event: any) => setTimerTitle(event.target.value)
 
-  const DateChange = (newValue: Moment | null) => {
-    setTimerDate(newValue)
-  }
+  const DateChange = (newValue: Dayjs | null) => setTimerDate(newValue)
 
   const Generate = () => {
     const currentTime: Date = new Date()
     const currentUnix: number = currentTime.getTime()
-    const futureUnix: number | undefined = timerDate?.seconds(0).valueOf()
+    const futureUnix: number | undefined = timerDate?.second(0).valueOf()
     let futureTime: string = ""
     if (futureUnix) {
       if (currentUnix > futureUnix) {

@@ -2,8 +2,6 @@ import Calendar from './components/Calendar'
 import Countdown from './components/Countdown'
 import CountdownTimer from './components/CountdownTimer'
 import DailyProgress from './components/DailyProgress'
-import Givemekeyword from './components/Givemekeyword'
-import Givemephoto from './components/Givemephoto'
 
 export const WidgetInfos: any = [
   {
@@ -34,18 +32,4 @@ export const WidgetInfos: any = [
     "path": "/countdown/timer",
     "element": <CountdownTimer />
   },
-  {
-    "name": "Give me a photo",
-    "url": "/notion/givemekeyword",
-    "timestamp": false,
-    "path": "/givemekeyword",
-    "element": <Givemekeyword />
-  },
-  {
-    "name": "",
-    "url": "",
-    "timestamp": false,
-    "path": "/givemekeyword/photo",
-    "element": <Givemephoto />
-  }
 ]
