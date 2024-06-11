@@ -10,11 +10,25 @@ import IconButton from '@mui/material/IconButton'
 import HomeIcon from '@mui/icons-material/Home'
 import dayjs, { Dayjs } from 'dayjs'
 import CopyToClipboard from 'react-copy-to-clipboard'
+import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay'
 import { DesktopDateTimePicker } from '@mui/x-date-pickers/DesktopDateTimePicker'
+
+const HighlightWeekends = (props: PickersDayProps<Dayjs>) => {
+  const { day, outsideCurrentMonth, ...other } = props
+
+  const week: number = day.day()
+  var isWeek = false
+  if (week === 0 || week === 6) {
+    isWeek = true
+  }
+  return (
+    <PickersDay sx={{ color: isWeek ? "red" : "" }} {...other} outsideCurrentMonth={outsideCurrentMonth} day={day} />
+  )
+}
 
 export default function Countdown() {
   const [timerTitle, setTimerTitle] = useState<string>("")
-  const [timerDate, setTimerDate] = useState<Dayjs | null>(dayjs(new Date()))
+  const [timerDate, setTimerDate] = useState<Dayjs | null>(dayjs(new Date()).add(5, "minute"))
   const [timerResult, setTimerResult] = useState<string>("")
   const [copyStatus, setCopyStatus] = useState<string>("copy")
 
@@ -91,7 +105,9 @@ export default function Countdown() {
             disablePast
             value={timerDate}
             onChange={DateChange}
-            slotProps={{}}
+            slots={{
+              day: HighlightWeekends,
+            }}
           />
           <TextField
             error={timerTitleError !== ""}
