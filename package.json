@@ -28,30 +28,30 @@
     ]
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mui/icons-material": "^5.15.19",
-    "@mui/material": "^5.15.19",
-    "@mui/x-date-pickers": "^7.6.2",
-    "dayjs": "^1.11.11",
-    "react": "^18.3.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.3.0",
+    "@mui/material": "^6.3.0",
+    "@mui/x-date-pickers": "^7.23.3",
+    "dayjs": "^1.11.13",
+    "react": "^19.0.0",
     "react-copy-to-clipboard": "^5.1.0",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.23.1"
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.1"
   },
   "devDependencies": {
-    "@types/node": "^20.14.2",
-    "@types/react": "^18.3.3",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
     "@types/react-copy-to-clipboard": "^5.0.7",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
-    "oxlint": "^0.4.3",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.13",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "oxlint": "^0.15.4",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.6",
     "vite-plugin-chunk-split": "^0.5.0",
     "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-svgr": "^4.2.0",
-    "vite-tsconfig-paths": "^4.3.2"
+    "vite-plugin-svgr": "^4.3.0",
+    "vite-tsconfig-paths": "^5.1.4"
   },
-  "packageManager": "pnpm@9.3.0+sha512.ee7b93e0c2bd11409c6424f92b866f31d3ea1bef5fbe47d3c7500cdc3c9668833d2e55681ad66df5b640c61fa9dc25d546efa54d76d7f8bf54b13614ac293631"
+  "packageManager": "pnpm@9.15.2"
 }

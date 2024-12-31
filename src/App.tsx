@@ -40,7 +40,8 @@ function App() {
         },
         typography: {
           fontFamily: [
-            'Martian Mono',
+            'Noto Sans Mono',
+            "Noto Sans SC",
             "monospace",
           ].join(','),
         },
