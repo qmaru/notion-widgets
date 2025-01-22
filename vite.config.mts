@@ -29,7 +29,7 @@ export default defineConfig({
       workbox: {
         runtimeCaching: [
           {
-            urlPattern: /\.(?:js|css|html|png|jpg|svg|ico|avif|wasm|onnx)$/,
+            urlPattern: /\.(?:js|css|html|png|jpg|svg|ico|avif|wasm|onnx|woff|woff2)$/,
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "notion-static-cache",
