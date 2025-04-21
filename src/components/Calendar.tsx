@@ -6,7 +6,7 @@ import Container from '@mui/material/Container'
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay'
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
 
-const HighlightWeekends = (props: PickersDayProps<Dayjs>) => {
+const HighlightWeekends = (props: PickersDayProps) => {
   const { day, outsideCurrentMonth, ...other } = props
 
   const week: number = day.day()

@@ -13,7 +13,7 @@ import CopyToClipboard from 'react-copy-to-clipboard'
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay'
 import { DesktopDateTimePicker } from '@mui/x-date-pickers/DesktopDateTimePicker'
 
-const HighlightWeekends = (props: PickersDayProps<Dayjs>) => {
+const HighlightWeekends = (props: PickersDayProps) => {
   const { day, outsideCurrentMonth, ...other } = props
 
   const week: number = day.day()
