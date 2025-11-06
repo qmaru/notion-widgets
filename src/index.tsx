@@ -9,7 +9,7 @@ const intervalMS = 60 * 60 * 1000;
 // eslint-disable-next-line no-unused-vars
 const updateSW = registerSW({
   onRegisteredSW(swUrl, r) {
-    r &&
+    if (r) {
       setInterval(async () => {
         if (r.installing || !navigator) return
 
@@ -25,6 +25,7 @@ const updateSW = registerSW({
 
         if (resp?.status === 200) await r.update()
       }, intervalMS)
+    }
   },
 })
 
