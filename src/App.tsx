@@ -37,7 +37,7 @@ function App() {
           tonalOffset: 0.2,
         },
         typography: {
-          fontFamily: ["Noto Sans Mono", "Noto Sans SC", "monospace"].join(","),
+          fontFamily: ["Google Sans Code", "Noto Sans SC", "monospace"].join(","),
         },
       }),
     [prefersDarkMode],
