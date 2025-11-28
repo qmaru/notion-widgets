@@ -1,13 +1,13 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from "react"
 import { useSearchParams } from "react-router-dom"
-import useMediaQuery from '@mui/material/useMediaQuery'
+import useMediaQuery from "@mui/material/useMediaQuery"
 
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
-import Paper from '@mui/material/Paper'
+import Container from "@mui/material/Container"
+import Box from "@mui/material/Box"
+import Card from "@mui/material/Card"
+import CardContent from "@mui/material/CardContent"
+import Typography from "@mui/material/Typography"
+import Paper from "@mui/material/Paper"
 
 const addZero = (t: number) => {
   return t.toString().padStart(2, "0")
@@ -23,21 +23,18 @@ const getDateDetails = (countDown: number) => {
 
 const PaperDate = (props: any) => {
   return (
-    <Paper elevation={4} sx={{
-      padding: "0.4rem",
-      backgroundImage: `${props.darkMode ? "linear-gradient(0.5turn, #414345 10%, #232526 40%)" : "linear-gradient(0.5turn, #FFFFFF 10%, #ECE9E6 50%)"}`,
-      color: `${props.darkMode ? "#ECE9E6" : "#232526"}`
-    }}>
-      <Typography
-        component="div"
-        sx={{ paddingTop: "0.2rem" }}
-      >
+    <Paper
+      elevation={4}
+      sx={{
+        padding: "0.4rem",
+        backgroundImage: `${props.darkMode ? "linear-gradient(0.5turn, #414345 10%, #232526 40%)" : "linear-gradient(0.5turn, #FFFFFF 10%, #ECE9E6 50%)"}`,
+        color: `${props.darkMode ? "#ECE9E6" : "#232526"}`,
+      }}
+    >
+      <Typography component="div" sx={{ paddingTop: "0.2rem" }}>
         {props.value}
       </Typography>
-      <Typography
-        component="div"
-        variant="caption"
-      >
+      <Typography component="div" variant="caption">
         {props.unit}
       </Typography>
     </Paper>
@@ -46,16 +43,18 @@ const PaperDate = (props: any) => {
 
 const BoxDate = (props: any) => {
   return (
-    <Box sx={{
-      display: 'flex',
-      justifyContent: "center",
-      flexWrap: 'wrap',
-      '& > :not(style)': {
-        margin: "0 0.2rem",
-        width: `${props.width}`,
-        height: "20%",
-      }
-    }} >
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        "& > :not(style)": {
+          margin: "0 0.2rem",
+          width: `${props.width}`,
+          height: "20%",
+        },
+      }}
+    >
       {props.pages}
     </Box>
   )
@@ -71,26 +70,57 @@ const Timer = (props: any) => {
 
   return (
     <Typography component="div">
-      {total <= 0 ?
-        <BoxDate key={"timeup"} width="50%" pages={[
-          <PaperDate darkMode={props.darkMode} key={"timeup"} value={"Time up"} unit={"Please reset"} />
-        ]}>
-        </BoxDate>
-        :
-        <BoxDate key={"timer"} width="15%" pages={[
-          <PaperDate darkMode={props.darkMode} key={props.dayUnit} value={days} unit={props.dayUnit} />,
-          <PaperDate darkMode={props.darkMode} key={props.hourUnit} value={addZero(hours)} unit={props.hourUnit} />,
-          <PaperDate darkMode={props.darkMode} key={props.minuteUnit} value={addZero(minutes)} unit={props.minuteUnit} />,
-          <PaperDate darkMode={props.darkMode} key={props.secondUnit} value={addZero(seconds)} unit={props.secondUnit} />
-        ]}>
-        </BoxDate>
-      }
+      {total <= 0 ? (
+        <BoxDate
+          key={"timeup"}
+          width="50%"
+          pages={[
+            <PaperDate
+              darkMode={props.darkMode}
+              key={"timeup"}
+              value={"Time up"}
+              unit={"Please reset"}
+            />,
+          ]}
+        ></BoxDate>
+      ) : (
+        <BoxDate
+          key={"timer"}
+          width="15%"
+          pages={[
+            <PaperDate
+              darkMode={props.darkMode}
+              key={props.dayUnit}
+              value={days}
+              unit={props.dayUnit}
+            />,
+            <PaperDate
+              darkMode={props.darkMode}
+              key={props.hourUnit}
+              value={addZero(hours)}
+              unit={props.hourUnit}
+            />,
+            <PaperDate
+              darkMode={props.darkMode}
+              key={props.minuteUnit}
+              value={addZero(minutes)}
+              unit={props.minuteUnit}
+            />,
+            <PaperDate
+              darkMode={props.darkMode}
+              key={props.secondUnit}
+              value={addZero(seconds)}
+              unit={props.secondUnit}
+            />,
+          ]}
+        ></BoxDate>
+      )}
     </Typography>
   )
 }
 
 export default function CountdownTimer() {
-  const prefersDarkMode: boolean = useMediaQuery('(prefers-color-scheme: dark)')
+  const prefersDarkMode: boolean = useMediaQuery("(prefers-color-scheme: dark)")
   const [searchParams] = useSearchParams()
   const [timerTitle, setTimerTitle] = useState<string>("No Title")
   const [timerDate, setTimerDate] = useState<number>(new Date().getTime())
@@ -152,7 +182,9 @@ export default function CountdownTimer() {
     LoadUnit()
 
     window.addEventListener("resize", AdaptiveUnit)
-    const tick = setInterval(() => { setTimerDate(timerDate - 1) }, 1000)
+    const tick = setInterval(() => {
+      setTimerDate(timerDate - 1)
+    }, 1000)
 
     return () => {
       clearInterval(tick)
@@ -167,24 +199,35 @@ export default function CountdownTimer() {
       sx={{
         marginLeft: "unset",
         width: "100vw",
-        height: "100vh"
+        height: "100vh",
       }}
       disableGutters
     >
       <Box sx={{ textAlign: "center" }}>
-        <Card sx={{ backgroundImage: `${prefersDarkMode ? "linear-gradient(0.5turn, #3b3b3b 10%, #121212 50%)" : "linear-gradient(0.5turn, #ECE9E6 10%, #FFFFFF 80%)"}` }}>
+        <Card
+          sx={{
+            backgroundImage: `${prefersDarkMode ? "linear-gradient(0.5turn, #3b3b3b 10%, #121212 50%)" : "linear-gradient(0.5turn, #ECE9E6 10%, #FFFFFF 80%)"}`,
+          }}
+        >
           <CardContent>
             <Typography
               variant="h5"
               component="div"
               sx={{
                 padding: "1.5vw",
-                color: `${prefersDarkMode ? "#ECE9E6" : "#232526"}`
+                color: `${prefersDarkMode ? "#ECE9E6" : "#232526"}`,
               }}
             >
               {timerTitle}
             </Typography>
-            <Typography variant="caption" display="block" gutterBottom sx={{ paddingBottom: "0.2vw" }}>{FutureDateShow()}</Typography>
+            <Typography
+              variant="caption"
+              display="block"
+              gutterBottom
+              sx={{ paddingBottom: "0.2vw" }}
+            >
+              {FutureDateShow()}
+            </Typography>
             <Typography component="div">
               <Timer
                 initTimer={timerDate}

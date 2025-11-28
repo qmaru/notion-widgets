@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { styled } from '@mui/material/styles'
-import Container from '@mui/material/Container'
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
+import { useState, useEffect } from "react"
+import useMediaQuery from "@mui/material/useMediaQuery"
+import { styled } from "@mui/material/styles"
+import Container from "@mui/material/Container"
+import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress"
+import Typography from "@mui/material/Typography"
+import Box from "@mui/material/Box"
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }: any) => ({
   height: "10vh",
@@ -13,11 +13,11 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }: any) => ({
     backgroundColor: `${theme.palette.mode === "dark" ? "#121212" : "#ffffff"}`,
     borderRadius: "0.3rem",
     border: `4px solid ${theme.palette.mode === "dark" ? "#121212" : "#ffffff"}`,
-    boxShadow: `0 0 0 4px ${theme.palette.mode === "dark" ? "#ECE9E6" : "#232526"}`
+    boxShadow: `0 0 0 4px ${theme.palette.mode === "dark" ? "#ECE9E6" : "#232526"}`,
   },
   [`& .${linearProgressClasses.bar}`]: {
-    backgroundImage: `${theme.palette.mode === "dark" ? "linear-gradient(135deg, #ECE9E6 10%, #FFFFFF 100%)" : "linear-gradient(135deg, #232526 10%, #414345 100%)"}`
-  }
+    backgroundImage: `${theme.palette.mode === "dark" ? "linear-gradient(135deg, #ECE9E6 10%, #FFFFFF 100%)" : "linear-gradient(135deg, #232526 10%, #414345 100%)"}`,
+  },
 }))
 
 const yearDays = () => {
@@ -42,8 +42,8 @@ const monthDays = () => {
 
 const LinearProgressWithText = (props: any) => {
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <Box sx={{ width: '100%' }}>
+    <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ width: "100%" }}>
         <BorderLinearProgress variant="determinate" value={props.value} />
       </Box>
       <Box sx={{ minWidth: "8rem", padding: "0 1rem" }}>
@@ -56,7 +56,7 @@ const LinearProgressWithText = (props: any) => {
 }
 
 export default function DailyProgress() {
-  const prefersDarkMode: boolean = useMediaQuery('(prefers-color-scheme: dark)')
+  const prefersDarkMode: boolean = useMediaQuery("(prefers-color-scheme: dark)")
   const [yearDaysProgress, setYearDaysProgress] = useState<number>(0)
   const [monthDaysProgress, setMonthDaysProgress] = useState<number>(0)
   const [dayTimeProgress, setDayTimeProgress] = useState<number>(0)
@@ -69,7 +69,7 @@ export default function DailyProgress() {
 
     const dateGap: number = currentDate.getTime() - firstDay.getTime()
     const dayProgerss: number = Math.floor(dateGap / (1000 * 60 * 60 * 24))
-    const dayPer: number = Math.round(dayProgerss / days * 100)
+    const dayPer: number = Math.round((dayProgerss / days) * 100)
     setYearDaysProgress(dayPer)
   }
 
@@ -82,7 +82,7 @@ export default function DailyProgress() {
     const firstDay: Date = new Date(currentDate.getFullYear(), currentMonth, 1)
 
     const dateGap: number = currentDate.getDate() - firstDay.getDate()
-    const dayProgerss: number = Math.round(dateGap / days * 100)
+    const dayProgerss: number = Math.round((dateGap / days) * 100)
     setMonthDaysProgress(dayProgerss)
   }
 
@@ -91,7 +91,7 @@ export default function DailyProgress() {
     const currentHours: number = currentDate.getHours()
     const currentMinutes: number = currentDate.getMinutes()
 
-    const dayProgerss: number = Math.floor((currentHours * 60 + currentMinutes) / 1440 * 100)
+    const dayProgerss: number = Math.floor(((currentHours * 60 + currentMinutes) / 1440) * 100)
     setDayTimeProgress(dayProgerss)
   }
 
@@ -102,18 +102,22 @@ export default function DailyProgress() {
   })
 
   return (
-    <Container
-      maxWidth={false}
-    >
-      <Box sx={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        width: '100%',
-        justifyContent: "center"
-      }}>
+    <Container maxWidth={false}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+          width: "100%",
+          justifyContent: "center",
+        }}
+      >
         <LinearProgressWithText darkMode={prefersDarkMode} title="Year" value={yearDaysProgress} />
-        <LinearProgressWithText darkMode={prefersDarkMode} title="Month" value={monthDaysProgress} />
+        <LinearProgressWithText
+          darkMode={prefersDarkMode}
+          title="Month"
+          value={monthDaysProgress}
+        />
         <LinearProgressWithText darkMode={prefersDarkMode} title="Day" value={dayTimeProgress} />
       </Box>
     </Container>

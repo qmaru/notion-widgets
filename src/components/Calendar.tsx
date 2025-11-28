@@ -1,10 +1,10 @@
 import { useState } from "react"
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs, { Dayjs } from "dayjs"
 
-import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
-import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay'
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import { PickersDay, PickersDayProps } from "@mui/x-date-pickers/PickersDay"
+import { DateCalendar } from "@mui/x-date-pickers/DateCalendar"
 
 const HighlightWeekends = (props: PickersDayProps) => {
   const { day, outsideCurrentMonth, ...other } = props
@@ -15,7 +15,12 @@ const HighlightWeekends = (props: PickersDayProps) => {
     isWeek = true
   }
   return (
-    <PickersDay sx={{ color: isWeek ? "red" : "" }} {...other} outsideCurrentMonth={outsideCurrentMonth} day={day} />
+    <PickersDay
+      sx={{ color: isWeek ? "red" : "" }}
+      {...other}
+      outsideCurrentMonth={outsideCurrentMonth}
+      day={day}
+    />
   )
 }
 
